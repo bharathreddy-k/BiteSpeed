@@ -28,7 +28,7 @@ app.use(compression());
 
 // Request logging in development
 if (process.env.NODE_ENV === 'development') {
-  app.use((req, res, next) => {
+  app.use((req, _res, next) => {
     console.log(`${req.method} ${req.path}`, req.body);
     next();
   });

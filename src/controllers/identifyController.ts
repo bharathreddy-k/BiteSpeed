@@ -25,7 +25,7 @@ export class IdentifyController {
   /**
    * Health check endpoint
    */
-  static async healthCheck(req: Request, res: Response): Promise<void> {
+  static async healthCheck(_req: Request, res: Response): Promise<void> {
     res.status(200).json({
       status: 'healthy',
       timestamp: new Date().toISOString(),
