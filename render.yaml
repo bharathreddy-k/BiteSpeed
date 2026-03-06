@@ -1,0 +1,14 @@
+# Render Deployment Configuration
+# This file is used when deploying to Render.com
+
+# Build settings
+buildCommand: npm install && npm run build
+startCommand: npm start
+
+# Environment
+envVars:
+  - key: NODE_ENV
+    value: production
+
+# For database, add PostgreSQL service in Render dashboard
+# and add DATABASE_URL environment variable automatically

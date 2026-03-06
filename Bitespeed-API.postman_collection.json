@@ -1,0 +1,227 @@
+{
+  "info": {
+    "name": "Bitespeed Identity Reconciliation API",
+    "description": "API collection for testing the Bitespeed Identity Reconciliation Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the service is running"
+      }
+    },
+    {
+      "name": "Identify - New Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lorraine@hillvalley.edu\",\n  \"phoneNumber\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Create a new primary contact"
+      }
+    },
+    {
+      "name": "Identify - Add Secondary Contact",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"mcfly@hillvalley.edu\",\n  \"phoneNumber\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Add secondary contact with same phone but different email"
+      }
+    },
+    {
+      "name": "Identify - Email Only",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lorraine@hillvalley.edu\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Identify using email only"
+      }
+    },
+    {
+      "name": "Identify - Phone Only",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phoneNumber\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Identify using phone number only"
+      }
+    },
+    {
+      "name": "Identify - Merge Primary Contacts (Step 1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"george@hillvalley.edu\",\n  \"phoneNumber\": \"919191\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Create first primary contact"
+      }
+    },
+    {
+      "name": "Identify - Merge Primary Contacts (Step 2)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"biffsucks@hillvalley.edu\",\n  \"phoneNumber\": \"717171\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Create second primary contact"
+      }
+    },
+    {
+      "name": "Identify - Merge Primary Contacts (Step 3)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"george@hillvalley.edu\",\n  \"phoneNumber\": \"717171\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Merge the two primary contacts"
+      }
+    },
+    {
+      "name": "Identify - Invalid Request (No Data)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Test validation error when no email or phone provided"
+      }
+    },
+    {
+      "name": "Identify - Invalid Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"not-an-email\",\n  \"phoneNumber\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/identify",
+          "host": ["{{baseUrl}}"],
+          "path": ["identify"]
+        },
+        "description": "Test validation error for invalid email format"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
