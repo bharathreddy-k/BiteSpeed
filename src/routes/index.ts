@@ -5,6 +5,35 @@ import { identifyValidation, handleValidationErrors } from '../middleware/valida
 const router = Router();
 
 /**
+ * GET /
+ * API information endpoint
+ */
+router.get('/', (_req, res) => {
+  res.json({
+    service: 'Bitespeed Identity Reconciliation API',
+    version: '1.0.0',
+    status: 'operational',
+    endpoints: {
+      identify: {
+        method: 'POST',
+        path: '/identify',
+        description: 'Reconcile customer identity based on email and/or phone number',
+        body: {
+          email: 'string (optional)',
+          phoneNumber: 'string (optional)',
+        },
+      },
+      health: {
+        method: 'GET',
+        path: '/health',
+        description: 'Check API health status',
+      },
+    },
+    documentation: 'https://github.com/bharathreddy-k/BiteSpeed',
+  });
+});
+
+/**
  * POST /identify
  * Main endpoint for identity reconciliation
  */
