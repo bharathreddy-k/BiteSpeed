@@ -18,7 +18,7 @@ export const identifyValidation = [
     .trim(),
 
   // Custom validation: at least one of email or phoneNumber must be provided
-  body().custom((value, { req }) => {
+  body().custom((_value: any, { req }: any) => {
     const { email, phoneNumber } = req.body;
     if (!email && !phoneNumber) {
       throw new Error('At least one of email or phoneNumber must be provided');
@@ -40,7 +40,7 @@ export const handleValidationErrors = (
   if (!errors.isEmpty()) {
     return res.status(400).json({
       error: 'Validation failed',
-      details: errors.array().map((err) => ({
+      details: errors.array().map((err: any) => ({
         field: err.type === 'field' ? err.path : 'body',
         message: err.msg,
       })),
@@ -55,9 +55,9 @@ export const handleValidationErrors = (
  */
 export const errorHandler = (
   err: Error,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   console.error('Error:', err);
 

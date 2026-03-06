@@ -158,7 +158,7 @@ export class IdentityService {
    */
   private static async handleMergePrimaryContacts(
     primaryContacts: Contact[],
-    allContacts: Contact[]
+    _allContacts: Contact[]
   ): Promise<IdentifyResponse> {
     // Sort by creation time - oldest becomes the primary
     primaryContacts.sort((a, b) => {
